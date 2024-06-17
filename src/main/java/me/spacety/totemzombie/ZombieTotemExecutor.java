@@ -38,21 +38,32 @@ public class ZombieTotemExecutor implements CommandExecutor, TabCompleter{
 
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (args[0].equalsIgnoreCase("spawn") && player.hasPermission("totemzombie.spawn")) {
-                handleTZSpawn(player);
-                return true;
-            } else if (args[0].equalsIgnoreCase("despawn") && player.hasPermission("totemzombie.despawn")) {
-                handleTZDespawn(player);
-                return true;
-            } else if (args[0].equalsIgnoreCase("reload") && player.hasPermission("totemzombie.reload")) {
-                Main.reloadCfg();
-                PlayerMessage.send(player, Main.getString("messages.reload"));
-                return true;
-            } else {
-                if (!player.hasPermission("totemzombie.spawn") || !player.hasPermission("totemzombie.despawn") || !player.hasPermission("totemzombie.reload")) {
+            if (args[0].equalsIgnoreCase("spawn")) {
+                if (player.hasPermission("totemzombie.spawn")) {
+                    handleTZSpawn(player);
+                    return true;
+                } else {
                     PlayerMessage.send(player, Main.getString("messages.error.no-permission"));
                     return true;
                 }
+            } else if (args[0].equalsIgnoreCase("despawn") && player.hasPermission("totemzombie.despawn")) {
+                if (player.hasPermission("totemzombie.despawn")) {
+                    handleTZDespawn(player);
+                    return true;
+                } else {
+                    PlayerMessage.send(player, Main.getString("messages.error.no-permission"));
+                    return true;
+                }
+            } else if (args[0].equalsIgnoreCase("reload") && player.hasPermission("totemzombie.reload")) {
+                if (player.hasPermission("totemzombie.reload")) {
+                    Main.reloadCfg();
+                    PlayerMessage.send(player, Main.getString("messages.reload"));
+                    return true;
+                } else {
+                    PlayerMessage.send(player, Main.getString("messages.error.no-permission"));
+                    return true;
+                }
+            } else {
                 PlayerMessage.send(player, "&cUsage: /tz <spawn/despawn>");
                 return true;
             }
@@ -79,7 +90,7 @@ public class ZombieTotemExecutor implements CommandExecutor, TabCompleter{
             subCommands.add("despawn");
             subCommands.add("reload");
             return subCommands.stream()
-                .filter(subCommand -> subCommand.toLowerCase(Locale.ROOT).contains(args[0].toLowerCase()))
+                .filter(subCommand -> subCommand.toLowerCase(Locale.ROOT).startsWith(args[0].toLowerCase()))
                 .collect(Collectors.toList());
         }
         return null;
