@@ -70,10 +70,10 @@ public class ZombieTotemExecutor implements CommandExecutor, TabCompleter{
         } else {
             if (args[0].equalsIgnoreCase("reload")) {
                 Main.reloadCfg();
-                commandSender.sendMessage(PlayerMessage.formatColors(Main.getString("messages.reload")));
+                commandSender.sendMessage(PlayerMessage.formatColors(Main.getString("messages.reload.success")));
                 return true;
             } else {
-                commandSender.sendMessage(PlayerMessage.formatColors(Main.getString("messages.error.playerOnly")));
+                commandSender.sendMessage(PlayerMessage.formatColors(Main.getString("messages.error.player-only")));
             }
         }
 
