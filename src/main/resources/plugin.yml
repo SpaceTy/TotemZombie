@@ -1,0 +1,25 @@
+name: TotemZombie
+version: '${project.version}'
+main: me.spacety.totemzombie.Main
+api-version: '1.20'
+
+commands:
+  totemzombie:
+    description: 'TotemZombie main command'
+    usage: '/totemzombie <spawn/despawn>'
+    permission: 'totemzombie.use'
+    aliases:
+    - tz
+    - totemz
+    - totemzombies
+
+permissions:
+  totemzombie.use:
+    description: 'Allows the player to use the totemzombie command'
+    default: op
+  totemzombie.spawn:
+    description: 'Allows the player to spawn a totemzombie'
+    default: op
+  totemzombie.despawn:
+    description: 'Allows the player to despawn a totemzombie'
+    default: op
