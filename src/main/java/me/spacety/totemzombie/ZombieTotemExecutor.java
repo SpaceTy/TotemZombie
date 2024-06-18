@@ -99,7 +99,7 @@ public class ZombieTotemExecutor implements CommandExecutor, TabCompleter{
     private void handleTZSpawn(Player player) {
         Entity entity = player.getLocation().getWorld().spawnEntity(player.getLocation(), EntityType.ZOMBIE);
 
-        TextComponent displayName = PlayerMessage.formatColors(Main.getString("zombie-totem.display-name"));
+        TextComponent displayName = PlayerMessage.formatColors(Main.getString("zombie-totem.display-name").replace("%player%", player.getName()));
         entity.customName(displayName);
         entity.setCustomNameVisible(true);
         entity.setGlowing(true);
